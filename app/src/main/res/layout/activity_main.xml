@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:id="@+id/main_browse_fragment"
-          android:name="xyz.janficko.teevee.MainFragment"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          tools:context=".MainActivity"
-          tools:deviceIds="tv"
-          tools:ignore="MergeRootFrame"/>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/activity_main"
+        android:name="xyz.janficko.teevee.ui.home.MainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <WebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"/>
+
+</FrameLayout>

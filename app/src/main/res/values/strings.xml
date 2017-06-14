@@ -1,6 +1,42 @@
 <resources>
     <string name="app_name">TeeVee</string>
-    <string name="browse_title"><![CDATA[Videos by Your Company]]></string>
+
+
+    <string name="my_subreddits">My subreddits</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+
+    <!-- Strings related to onboarding -->
+    <string name="onboarding_title_welcome">Welcome to the TeeVee app</string>
+    <string name="onboarding_title_frontpage">Your frontpage</string>
+    <string name="onboarding_title_submark">Favourite subreddit</string>
+    <string name="onboarding_title_others">Finding other subscribed subreddits</string>
+    <string name="onboarding_description_welcome">This is an ad free Reddit browser built for Android TV platform.</string>
+    <string name="onboarding_description_frontpage">If you\'re logged in you can browse through your frontpage posts by selecting Frontpage under navigation.</string>
+    <string name="onboarding_description_submark">You can add your main favourite subreddit to the submark section. (r/all is default)</string>
+    <string name="onboarding_description_others">If you\'re logged in a list of subscribed subreddits is available in your left navigation under the header items.</string>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Error messages -->
+    <string name="error_permission_needed">You must first allow some permissions to TeeVee app before proceeding</string>
+    <string name="video_error_media_load_timeout">Media loading timed out</string>
+    <string name="video_error_server_inaccessible">Media server was not reachable</string>
+    <string name="video_error_unknown_error">Failed to load video</string>
+    <string name="error_fragment_message">An error occurred</string>
+    <string name="dismiss_error">Dismiss</string>
+    <string name="oops">Oops</string>
+
+    <string name="browse_title"><![CDATA[TeeVee for Reddit]]></string>
+
     <string name="related_movies">Related Videos</string>
     <string name="vertical_grid_title"><![CDATA[Vertical Video Grid]]></string>
     <string name="error">Error</string>
@@ -29,12 +65,4 @@
     <string name="should_start">shouldStart</string>
     <string name="start_position">startPosition</string>
     <string name="search_results">Search Results</string>
-
-    <!-- Error messages -->
-    <string name="video_error_media_load_timeout">Media loading timed out</string>
-    <string name="video_error_server_inaccessible">Media server was not reachable</string>
-    <string name="video_error_unknown_error">Failed to load video</string>
-    <string name="error_fragment_message">An error occurred</string>
-    <string name="dismiss_error">Dismiss</string>
-    <string name="oops">Oops</string>
 </resources>
