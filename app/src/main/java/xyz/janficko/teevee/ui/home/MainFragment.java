@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v17.leanback.app.BrowseFragment;
-import android.support.v17.leanback.app.RowsFragment;
 import android.support.v17.leanback.widget.ArrayObjectAdapter;
 import android.support.v17.leanback.widget.DividerRow;
 import android.support.v17.leanback.widget.HeaderItem;
@@ -28,15 +27,11 @@ import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.OnItemViewClickedListener;
 import android.support.v17.leanback.widget.PageRow;
 import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.PresenterSelector;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v17.leanback.widget.SectionRow;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.auth.AuthenticationManager;
@@ -45,16 +40,13 @@ import net.dean.jraw.auth.AuthenticationState;
 import xyz.janficko.teevee.TeeVee;
 import xyz.janficko.teevee.commons.Constants;
 import xyz.janficko.teevee.R;
+import xyz.janficko.teevee.commons.Keys;
 import xyz.janficko.teevee.models.Card;
-import xyz.janficko.teevee.models.CardListRow;
-import xyz.janficko.teevee.models.CardRow;
-import xyz.janficko.teevee.presenters.CardPresenterSelector;
 import xyz.janficko.teevee.presenters.ShadowRowPresenterSelector;
 import xyz.janficko.teevee.ui.search.SearchActivity;
 import xyz.janficko.teevee.ui.settings.SettingsFragment;
 import xyz.janficko.teevee.ui.subreddit.SubredditFragment;
 import xyz.janficko.teevee.util.SharedPreferenceUtil;
-import xyz.janficko.teevee.util.Utils;
 
 public class MainFragment extends BrowseFragment {
 
@@ -168,23 +160,23 @@ public class MainFragment extends BrowseFragment {
 			Row row = (Row)rowObj;
 			mBackgroundManager.setDrawable(null);
 			if (row.getHeaderItem().getId() == Constants.HEADER_ID[0]) {
-				/*Bundle bundle = new Bundle();
-				bundle.putString(Keys.PREF_SUBREDDIT, row.getHeaderItem().getName());
+				Bundle bundle = new Bundle();
+				bundle.putString(Keys.BUNDLE_SUBREDDIT, row.getHeaderItem().getName());
 
 				SubredditFragment subredditFragment= new SubredditFragment();
 				subredditFragment.setArguments(bundle);
 
-				return subredditFragment;*/
-				return new SampleFragmentB();
+				return subredditFragment;
 			} else if (row.getHeaderItem().getId() == Constants.HEADER_ID[1]) {
-				return new SampleFragmentB();
+				Bundle bundle = new Bundle();
+				// TODO: replace
+				bundle.putString(Keys.BUNDLE_SUBREDDIT, "All");
+
+				SubredditFragment subredditFragment= new SubredditFragment();
+				subredditFragment.setArguments(bundle);
+
+				return subredditFragment;
 			} else if (row.getHeaderItem().getId() == Constants.HEADER_ID[2]) {
-			/*Log.v(TAG, String.valueOf(mAuthenticateState));
-			if(mAuthenticateState == AuthenticationState.READY){
-				return new ProfileFragment();
-			} else {
-				return new LoginFragment();
-			}*/
 				return new SettingsFragment(this);
 			} else if (row.getHeaderItem().getId() == Constants.HEADER_ID[3]) {
 				return new SettingsFragment(this);
@@ -195,62 +187,5 @@ public class MainFragment extends BrowseFragment {
 		}
 
 
-	}
-
-	/*public static class PageFragmentAdapterImpl extends MainFragmentAdapter<SampleFragmentA> {
-
-		public PageFragmentAdapterImpl(SampleFragmentA fragment) {
-			super(fragment);
-		}
-	}*/
-
-	public static class SampleFragmentB extends RowsFragment {
-		private final ArrayObjectAdapter mRowsAdapter;
-
-		public SampleFragmentB() {
-			mRowsAdapter = new ArrayObjectAdapter(new ShadowRowPresenterSelector());
-
-			setAdapter(mRowsAdapter);
-			setOnItemViewClickedListener(new OnItemViewClickedListener() {
-				@Override
-				public void onItemClicked(
-						Presenter.ViewHolder itemViewHolder,
-						Object item,
-						RowPresenter.ViewHolder rowViewHolder,
-						Row row) {
-					Toast.makeText(getActivity(), "Implement click handler", Toast.LENGTH_SHORT)
-							.show();
-				}
-			});
-		}
-
-		@Override
-		public void onCreate(Bundle savedInstanceState) {
-			super.onCreate(savedInstanceState);
-			createRows();
-			getMainFragmentAdapter().getFragmentHost().notifyDataReady(getMainFragmentAdapter());
-		}
-
-		private void createRows() {
-			String json = Utils.inputStreamToString(getResources().openRawResource(
-					R.raw.page_row_example));
-			CardRow[] rows = new Gson().fromJson(json, CardRow[].class);
-			for (CardRow row : rows) {
-				if (row.getType() == CardRow.TYPE_DEFAULT) {
-					mRowsAdapter.add(createCardRow(row));
-				}
-			}
-		}
-
-		private Row createCardRow(CardRow cardRow) {
-			PresenterSelector presenterSelector = new CardPresenterSelector(getActivity());
-			ArrayObjectAdapter adapter = new ArrayObjectAdapter(presenterSelector);
-			for (Card card : cardRow.getCards()) {
-				adapter.add(card);
-			}
-
-			HeaderItem headerItem = new HeaderItem(cardRow.getTitle());
-			return new CardListRow(headerItem, adapter, cardRow);
-		}
 	}
 }

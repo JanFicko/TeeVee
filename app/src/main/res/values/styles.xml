@@ -18,6 +18,17 @@
     <style name="AppTheme" parent="@style/Theme.Leanback">
     </style>
 
+    <style name="TextCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
+
+    <style name="ThumbnailCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
+        <item name="cardBackground">@null</item>
+    </style>
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+
     <!-- Various movie card styles. Used in cards example. -->
     <style name="MovieCardBadgeStyle" parent="Widget.Leanback.ImageCardView.BadgeStyle">
         <item name="android:src">@drawable/stars_red</item>
@@ -92,11 +103,6 @@
     <!-- SideInfo. used in cards example -->
     <style name="SideInfoCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
         <item name="cardType">mainOnly</item>
-        <item name="cardBackground">@null</item>
-    </style>
-
-    <!-- TextCardView. used in cards example -->
-    <style name="TextCardStyle" parent="Widget.Leanback.BaseCardViewStyle">
         <item name="cardBackground">@null</item>
     </style>
 

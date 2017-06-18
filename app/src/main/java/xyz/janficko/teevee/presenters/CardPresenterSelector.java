@@ -46,6 +46,17 @@ public class CardPresenterSelector extends PresenterSelector {
         Presenter presenter = presenters.get(card.getType());
         if (presenter == null) {
             switch (card.getType()) {
+                case TEXT:
+                    presenter = new TextCardPresenter(mContext);
+                    break;
+                case THUMBNAIL:
+                    presenter = new ThumbnailCardPresenter(mContext);
+                    break;
+                case TITLE:
+                    presenter = new TitleCardPresenter(mContext);
+                    break;
+
+
                 case SINGLE_LINE:
                     presenter = new SingleLineCardPresenter(mContext);
                     break;
@@ -75,9 +86,6 @@ public class CardPresenterSelector extends PresenterSelector {
                 }
                 case SIDE_INFO:
                     presenter = new SideInfoCardPresenter(mContext);
-                    break;
-                case TEXT:
-                    presenter = new TextCardPresenter(mContext);
                     break;
                 case ICON:
                     presenter = new IconCardPresenter(mContext);

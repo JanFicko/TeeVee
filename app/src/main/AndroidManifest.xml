@@ -50,7 +50,7 @@
             android:exported="true"
             android:theme="@style/Theme.Example.LeanbackPreferences"/>
         <activity android:name=".ui.search.SearchActivity" />
-        <activity android:name=".ui.detail.DetailsActivity"/>
+        <activity android:name=".ui.detail.DetailActivity"/>
         <activity android:name=".ui.error.BrowseErrorActivity"/>
 
         <meta-data

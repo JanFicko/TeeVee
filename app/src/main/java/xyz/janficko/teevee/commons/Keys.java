@@ -7,8 +7,10 @@ package xyz.janficko.teevee.commons;
 public class Keys {
 
     public static final String PREFERENCES = "PREFERENCES";
+
     public static final String PREF_FIRST_START = "FIRST_START";
     public static final String PREF_REDDIT_TOKEN = "REDDIT_TOKEN";
-    public static final String PREF_SUBREDDIT = "SUBREDDIT";
+
+    public static final String BUNDLE_SUBREDDIT = "SUBREDDIT";
 
 }

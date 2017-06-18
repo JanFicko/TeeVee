@@ -18,20 +18,21 @@ import android.content.Context;
 
 import xyz.janficko.teevee.models.Card;
 import xyz.janficko.teevee.ui.views.TextCardView;
+import xyz.janficko.teevee.ui.views.ThumbnailCardView;
 
-public class TextCardPresenter extends AbstractCardPresenter<TextCardView> {
+public class ThumbnailCardPresenter extends AbstractCardPresenter<ThumbnailCardView> {
 
-    public TextCardPresenter(Context context) {
+    public ThumbnailCardPresenter(Context context) {
         super(context);
     }
 
     @Override
-    protected TextCardView onCreateView() {
-        return new TextCardView(getContext());
+    protected ThumbnailCardView onCreateView() {
+        return new ThumbnailCardView(getContext());
     }
 
     @Override
-    public void onBindViewHolder(Card card, final TextCardView cardView) {
+    public void onBindViewHolder(Card card, ThumbnailCardView cardView) {
         cardView.updateUi(card);
     }
 

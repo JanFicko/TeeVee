@@ -55,4 +55,20 @@ public class CardRow {
         return mCards;
     }
 
+
+    public void setType(int type) {
+        this.mType = type;
+    }
+
+    public void setShadow(boolean shadow) {
+        this.mShadow = shadow;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.mCards = cards;
+    }
 }

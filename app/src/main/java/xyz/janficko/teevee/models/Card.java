@@ -25,18 +25,39 @@ import java.net.URISyntaxException;
 
 public class Card {
 
+    @SerializedName("type") private Card.Type mType;
+    @SerializedName("id") private String mId;
+    @SerializedName("postInfo") private String mPostInfo = "";
     @SerializedName("title") private String mTitle = "";
-    @SerializedName("description") private String mDescription = "";
     @SerializedName("extraText") private String mExtraText = "";
+    @SerializedName("thumbnail") private String mThumbnail = "";
+
+
+    @SerializedName("description") private String mDescription = "";
     @SerializedName("card") private String mImageUrl;
     @SerializedName("footerColor") private String mFooterColor = null;
     @SerializedName("selectedColor") private String mSelectedColor = null;
     @SerializedName("localImageResource") private String mLocalImageResource = null;
     @SerializedName("footerIconLocalImageResource") private String mFooterResource = null;
-    @SerializedName("type") private Card.Type mType;
-    @SerializedName("id") private int mId;
     @SerializedName("width") private int mWidth;
     @SerializedName("height") private int mHeight;
+
+
+    public Card.Type getType() {
+        return mType;
+    }
+
+    public void setType(Type type) {
+        mType = type;
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
+    }
 
     public String getTitle() {
         return mTitle;
@@ -45,6 +66,32 @@ public class Card {
     public void setTitle(String title) {
         mTitle = title;
     }
+
+    public String getExtraText() {
+        return mExtraText;
+    }
+
+    public void setExtraText(String extraText) {
+        mExtraText = extraText;
+    }
+
+    public String getThumbnail() {
+        return mThumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.mThumbnail = thumbnail;
+    }
+
+    public String getPostInfo() {
+        return mPostInfo;
+    }
+
+    public void setPostInfo(String postInfo) {
+        this.mPostInfo = postInfo;
+    }
+
+    /* ------------------------------------------------------------------------- */
 
     public String getLocalImageResource() {
         return mLocalImageResource;
@@ -62,13 +109,7 @@ public class Card {
         mFooterResource = footerResource;
     }
 
-    public void setType(Type type) {
-        mType = type;
-    }
 
-    public void setId(int id) {
-        mId = id;
-    }
 
     public void setWidth(int width) {
         mWidth = width;
@@ -86,13 +127,7 @@ public class Card {
         return mHeight;
     }
 
-    public int getId() {
-        return mId;
-    }
 
-    public Card.Type getType() {
-        return mType;
-    }
 
     public String getDescription() {
         return mDescription;
@@ -103,13 +138,6 @@ public class Card {
     }
 
 
-    public String getExtraText() {
-        return mExtraText;
-    }
-
-    public void setExtraText(String extraText) {
-        mExtraText = extraText;
-    }
 
     public int getFooterColor() {
         if (mFooterColor == null) return -1;
@@ -161,6 +189,10 @@ public class Card {
     }
 
     public enum Type {
+        TEXT,
+        THUMBNAIL,
+        TITLE,
+
 
         MOVIE_COMPLETE,
         MOVIE,
@@ -173,7 +205,6 @@ public class Card {
         DEFAULT,
         SIDE_INFO,
         SIDE_INFO_TEST_1,
-        TEXT,
         CHARACTER,
         GRID_SQUARE,
         VIDEO_GRID

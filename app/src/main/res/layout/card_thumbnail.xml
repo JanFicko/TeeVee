@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lb="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <android.support.v17.leanback.widget.NonOverlappingRelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="36dp"
+        android:paddingTop="7dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="7dp"
+        android:orientation="horizontal"
+        android:gravity="start"
+        android:background="@color/post_card_title_background">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_gravity="start"
+            android:fontFamily="sans-serif-condensed"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:freezesText="true"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            style="@style/Widget.Leanback.ImageCardView.TitleStyle" />
+
+    </android.support.v17.leanback.widget.NonOverlappingRelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_thumbnail"
+        android:layout_width="300dp"
+        android:layout_height="167dp"
+        android:background="@color/post_card_extra_background"
+        lb:layout_viewType="main"
+        style="@style/Widget.Leanback.ImageCardView.ContentStyle"/>
+
+    <android.support.v17.leanback.widget.NonOverlappingRelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="36dp"
+        android:paddingTop="7dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="7dp"
+        android:gravity="start"
+        android:orientation="horizontal"
+        android:background="@color/default_card_footer_background_color">
+
+        <TextView
+            android:id="@+id/tv_post_info"
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_gravity="start"
+            android:fontFamily="sans-serif-condensed"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            style="@style/Widget.Leanback.ImageCardView.TitleStyle" />
+
+    </android.support.v17.leanback.widget.NonOverlappingRelativeLayout>
+
+</merge>

@@ -14,13 +14,19 @@
     <PreferenceScreen
         android:key="about_version"
         android:title="App version"
-        android:summary="1.0 - DEBUG"
+        android:summary="0.7.2 - DEBUG"
         android:selectable="false">
     </PreferenceScreen>
     <PreferenceScreen
         android:key="about_author"
         android:title="Author"
         android:summary="Jan Ficko"
+        android:selectable="false">
+    </PreferenceScreen>
+    <PreferenceScreen
+        android:key="about_contact"
+        android:title="Contact"
+        android:summary="jan.ficko@gmail.com"
         android:selectable="false">
     </PreferenceScreen>
 </PreferenceScreen>

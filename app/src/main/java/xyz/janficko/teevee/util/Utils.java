@@ -18,6 +18,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.graphics.Point;
 import android.net.Uri;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -118,4 +119,25 @@ public class Utils {
 				context.getResources().getResourceTypeName(resID) + '/' +
 				context.getResources().getResourceEntryName(resID));
 	}
+
+	public static String scoreWithSuffix(Integer score){
+		if (score < 1000) return "" + score;
+		int exp = (int) (Math.log(score) / Math.log(1000));
+		return String.format("%.1f%c",
+				score / Math.pow(1000, exp),
+				"kMGTPE".charAt(exp-1));
+	}
+
+	public static int countLine(int textLength){
+		int sign = (textLength > 0 ? 1 : -1) * (45 > 0 ? 1 : -1);
+
+		if (sign > 0) {
+			return (textLength + 45 - 1) / 45;
+		}
+		else {
+			return (textLength / 45);
+		}
+	}
+
+
 }

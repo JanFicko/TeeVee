@@ -23,10 +23,23 @@
 
 
 
-
-
-
     <!-- Error messages -->
+    <string name="implement_search">Implement your own in-app search.</string>
+    <string name="card_examples_title">Card Examples</string>
+    <string name="detail_view_title">DetailView Example</string>
+    <string name="action_cicked">Action clicked. Implement your own handler.</string>
+    <string name="grid_example_title">Image Grid Example</string>
+    <string name="video_grid_example_title">Video Grid Example</string>
+    <string name="videos_url">https://storage.googleapis.com/android-tv/android_tv_videos_new.json</string>
+    <string name="action_play">Play </string>
+    <string name="action_play_not_ready">The video is still being downloaded. Please wait and try
+            later.</string>
+    <string name="action_buy">Buy </string>
+    <string name="action_rent">Rent </string>
+    <string name="action_wishlist">Add to wishlist</string>
+    <string name="action_related">Related</string>
+    <string name="header_related">Related Items</string>
+    <string name="header_recommended">Recommended</string>
     <string name="error_permission_needed">You must first allow some permissions to TeeVee app before proceeding</string>
     <string name="video_error_media_load_timeout">Media loading timed out</string>
     <string name="video_error_server_inaccessible">Media server was not reachable</string>

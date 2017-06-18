@@ -53,13 +53,13 @@ public class SettingsIconPresenter extends ImageCardViewPresenter {
             public void onClick(View v) {
 
                 if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[0])){
-                    //mMainActivity.webViewRedditLogin();
+                    mMainActivity.webViewRedditLogin();
                 } else if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[1])){
-                    //mMainActivity.logout();
+                    mMainActivity.logout();
                 } else if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[2])){
 
                 } else if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[3])){
-                    //mMainActivity.openAbout();
+                    mMainActivity.openAbout();
                 }
             }
         });
