@@ -25,8 +25,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.dean.jraw.models.Subreddit;
+
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 
 
 public class CharacterCardView extends BaseCardView {
@@ -51,13 +53,14 @@ public class CharacterCardView extends BaseCardView {
         setFocusable(true);
     }
 
-    public void updateUi(Card card) {
+    public void updateUi(Object object) {
+        Submission submission = (Submission) object;
         TextView primaryText = (TextView) findViewById(R.id.primary_text);
         final ImageView imageView = (ImageView) findViewById(R.id.main_image);
 
-        primaryText.setText(card.getTitle());
-        if (card.getLocalImageResourceName() != null) {
-            int resourceId = card.getLocalImageResourceId(getContext());
+        primaryText.setText(submission.getTitle());
+        if (submission.getLocalImageResourceName() != null) {
+            int resourceId = submission.getLocalImageResourceId(getContext());
             Bitmap bitmap = BitmapFactory
                     .decodeResource(getContext().getResources(), resourceId);
             RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getContext().getResources(), bitmap);

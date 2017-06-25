@@ -23,7 +23,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 
 
 /**
@@ -48,15 +48,16 @@ public class SideInfoCardPresenter extends AbstractCardPresenter<BaseCardView> {
     }
 
     @Override
-    public void onBindViewHolder(Card card, BaseCardView cardView) {
+    public void onBindViewHolder(Object object, BaseCardView cardView) {
+        Submission submission = (Submission) object;
         ImageView imageView = (ImageView) cardView.findViewById(R.id.main_image);
-        if (card.getLocalImageResourceName() != null) {
+        if (submission.getLocalImageResourceName() != null) {
             int width = (int) getContext().getResources()
                     .getDimension(R.dimen.sidetext_image_card_width);
             int height = (int) getContext().getResources()
                     .getDimension(R.dimen.sidetext_image_card_height);
             int resourceId = getContext().getResources()
-                    .getIdentifier(card.getLocalImageResourceName(),
+                    .getIdentifier(submission.getLocalImageResourceName(),
                             "drawable", getContext().getPackageName());
             Glide.with(getContext())
                     .load(resourceId)
@@ -66,13 +67,13 @@ public class SideInfoCardPresenter extends AbstractCardPresenter<BaseCardView> {
         }
 
         TextView primaryText = (TextView) cardView.findViewById(R.id.primary_text);
-        primaryText.setText(card.getTitle());
+        primaryText.setText(submission.getTitle());
 
         TextView secondaryText = (TextView) cardView.findViewById(R.id.secondary_text);
-        secondaryText.setText(card.getDescription());
+        secondaryText.setText(submission.getDescription());
 
         TextView extraText = (TextView) cardView.findViewById(R.id.extra_text);
-        extraText.setText(card.getExtraText());
+        extraText.setText(submission.getExtraText());
     }
 
 }

@@ -41,8 +41,9 @@ import xyz.janficko.teevee.TeeVee;
 import xyz.janficko.teevee.commons.Constants;
 import xyz.janficko.teevee.R;
 import xyz.janficko.teevee.commons.Keys;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.presenters.ShadowRowPresenterSelector;
+import xyz.janficko.teevee.ui.profile.ProfileFragment;
 import xyz.janficko.teevee.ui.search.SearchActivity;
 import xyz.janficko.teevee.ui.settings.SettingsFragment;
 import xyz.janficko.teevee.ui.subreddit.SubredditFragment;
@@ -130,7 +131,7 @@ public class MainFragment extends BrowseFragment {
 		setOnItemViewClickedListener(new OnItemViewClickedListener() {
 			@Override
 			public void onItemClicked(Presenter.ViewHolder viewHolder, Object item, RowPresenter.ViewHolder viewHolder1, Row row) {
-				if (!(item instanceof Card)) return;
+				if (!(item instanceof Submission)) return;
 				if (!(viewHolder.view instanceof ImageCardView)) return;
 
 				/*ImageView imageView = ((ImageCardView) viewHolder.view).getMainImageView();
@@ -138,7 +139,7 @@ public class MainFragment extends BrowseFragment {
 						imageView, DetailViewExampleFragment.TRANSITION_NAME).toBundle();
 				Intent intent = new Intent(getActivity().getBaseContext(),
 						DetailViewExampleActivity.class);
-				Card card = (Card) item;
+				Submission card = (Submission) item;
 				int imageResId = card.getLocalImageResourceId(getContext());
 				intent.putExtra(DetailViewExampleFragment.EXTRA_CARD, imageResId);
 				startActivity(intent, bundle);*/
@@ -149,7 +150,6 @@ public class MainFragment extends BrowseFragment {
 
 	public static class PageRowFragmentFactory extends BrowseFragment.FragmentFactory {
 		private final BackgroundManager mBackgroundManager;
-		private AuthenticationState mAuthenticateState = AuthenticationManager.get().checkAuthState();
 
 		PageRowFragmentFactory(BackgroundManager backgroundManager) {
 			this.mBackgroundManager = backgroundManager;
@@ -177,7 +177,7 @@ public class MainFragment extends BrowseFragment {
 
 				return subredditFragment;
 			} else if (row.getHeaderItem().getId() == Constants.HEADER_ID[2]) {
-				return new SettingsFragment(this);
+				return new ProfileFragment();
 			} else if (row.getHeaderItem().getId() == Constants.HEADER_ID[3]) {
 				return new SettingsFragment(this);
 			}

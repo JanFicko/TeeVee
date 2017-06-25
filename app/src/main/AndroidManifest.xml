@@ -46,6 +46,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.settings.PreferenceActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Example.LeanbackPreferences"/>
+        <activity
             android:name=".ui.settings.AboutActivity"
             android:exported="true"
             android:theme="@style/Theme.Example.LeanbackPreferences"/>

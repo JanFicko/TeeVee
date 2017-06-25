@@ -13,4 +13,6 @@ public class Keys {
 
     public static final String BUNDLE_SUBREDDIT = "SUBREDDIT";
 
+    public static final String INTENT_SUBMISSION_ID = "SUBMISSION_ID";
+
 }

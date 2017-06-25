@@ -1,8 +1,9 @@
 package xyz.janficko.teevee.ui.detail;
 
-import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v17.leanback.app.DetailsFragment;
 import android.support.v17.leanback.app.DetailsFragmentBackgroundController;
 import android.support.v17.leanback.media.MediaPlayerGlue;
@@ -26,8 +27,15 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import net.dean.jraw.RedditClient;
+import net.dean.jraw.auth.AuthenticationManager;
+import net.dean.jraw.auth.AuthenticationState;
+
+import java.util.concurrent.ExecutionException;
+
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.TeeVee;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.models.CardListRow;
 import xyz.janficko.teevee.models.DetailedCard;
 import xyz.janficko.teevee.presenters.CardPresenterSelector;
@@ -40,6 +48,8 @@ import xyz.janficko.teevee.util.Utils;
 
 public class DetailFragment extends DetailsFragment implements OnItemViewClickedListener,
         OnItemViewSelectedListener {
+
+    private DetailActivity mDetailActivity;
 
     public static final String TRANSITION_NAME = "t_for_transition";
     public static final String EXTRA_CARD = "card";
@@ -57,13 +67,30 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
             new DetailsFragmentBackgroundController(this);
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mDetailActivity = (DetailActivity) getActivity();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         setupUi();
         setupEventListeners();
+
     }
 
     private void setupUi() {
+        net.dean.jraw.models.Submission submission = null;
+        try {
+            submission = new LoadSubmissionTask().execute(mDetailActivity.getSubmissionId()).get();
+        } catch (InterruptedException |ExecutionException e) {
+            e.printStackTrace();
+        }
+
+
         // Load the card we want to display from a JSON resource. This JSON data could come from
         // anywhere in a real world app, e.g. a server.
         String json = Utils
@@ -71,7 +98,7 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
         DetailedCard data = new Gson().fromJson(json, DetailedCard.class);
 
         // Setup fragment
-        setTitle(getString(R.string.detail_view_title));
+        setTitle(submission.getTitle());
 
         FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
                 new DetailsDescriptionPresenter(getActivity())) {
@@ -111,13 +138,13 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
 
         // Setup action and detail row.
         DetailsOverviewRow detailsOverview = new DetailsOverviewRow(data);
-        int imageResId = data.getLocalImageResourceId(getActivity());
+        //int imageResId = data.getLocalImageResourceId(getActivity());
 
         Bundle extras = getActivity().getIntent().getExtras();
         if (extras != null && extras.containsKey(EXTRA_CARD)) {
-            imageResId = extras.getInt(EXTRA_CARD, imageResId);
+           // imageResId = extras.getInt(EXTRA_CARD, imageResId);
         }
-        detailsOverview.setImageDrawable(getResources().getDrawable(imageResId, null));
+        //detailsOverview.setImageDrawable(getResources().getDrawable(imageResId, null));
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
 
         mActionBuy = new Action(ACTION_BUY, getString(R.string.action_buy) + data.getPrice());
@@ -133,13 +160,13 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
         // Setup related row.
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
                 new CardPresenterSelector(getActivity()));
-        for (Card characterCard : data.getCharacters()) listRowAdapter.add(characterCard);
+        for (Submission characterSubmission : data.getCharacters()) listRowAdapter.add(characterSubmission);
         HeaderItem header = new HeaderItem(0, getString(R.string.header_related));
         mRowsAdapter.add(new CardListRow(header, listRowAdapter, null));
 
         // Setup recommended row.
         listRowAdapter = new ArrayObjectAdapter(new CardPresenterSelector(getActivity()));
-        for (Card card : data.getRecommended()) listRowAdapter.add(card);
+        for (Submission card : data.getRecommended()) listRowAdapter.add(card);
         header = new HeaderItem(1, getString(R.string.header_recommended));
         mRowsAdapter.add(new ListRow(header, listRowAdapter));
 
@@ -150,13 +177,7 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
                 startEntranceTransition();
             }
         }, 500);
-        initializeBackground(data);
-    }
-
-    private void initializeBackground(DetailedCard data) {
-        mDetailsBackground.enableParallax();
-        mDetailsBackground.setCoverBitmap(BitmapFactory.decodeResource(getResources(),
-                R.drawable.background_canyon));
+        //initializeBackground(data);
     }
 
     private void setupEventListeners() {
@@ -186,6 +207,20 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
             getView().setBackgroundColor(backgroundColor);
         } else {
             getView().setBackground(null);
+        }
+    }
+
+    class LoadSubmissionTask extends AsyncTask<String, Void, net.dean.jraw.models.Submission> {
+
+        private AuthenticationState mAuthenticateState = AuthenticationManager.get().checkAuthState();
+        private RedditClient mRedditClient = TeeVee.getInstance().getRedditClient();
+
+        @Override
+        protected net.dean.jraw.models.Submission doInBackground(String... params) {
+
+            net.dean.jraw.models.Submission submission = mRedditClient.getSubmission(params[0]);
+
+            return submission;
         }
     }
 

@@ -57,7 +57,7 @@ public class SettingsIconPresenter extends ImageCardViewPresenter {
                 } else if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[1])){
                     mMainActivity.logout();
                 } else if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[2])){
-
+                    mMainActivity.openPreferences();
                 } else if(imageCardView.getTitleText().equals(Constants.SETTINGS_CATEGORY[3])){
                     mMainActivity.openAbout();
                 }

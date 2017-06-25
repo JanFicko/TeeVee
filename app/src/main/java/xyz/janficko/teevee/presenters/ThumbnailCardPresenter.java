@@ -16,8 +16,7 @@ package xyz.janficko.teevee.presenters;
 
 import android.content.Context;
 
-import xyz.janficko.teevee.models.Card;
-import xyz.janficko.teevee.ui.views.TextCardView;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.ui.views.ThumbnailCardView;
 
 public class ThumbnailCardPresenter extends AbstractCardPresenter<ThumbnailCardView> {
@@ -32,8 +31,8 @@ public class ThumbnailCardPresenter extends AbstractCardPresenter<ThumbnailCardV
     }
 
     @Override
-    public void onBindViewHolder(Card card, ThumbnailCardView cardView) {
-        cardView.updateUi(card);
+    public void onBindViewHolder(Object submission, ThumbnailCardView cardView) {
+        cardView.updateUi(submission);
     }
 
 }

@@ -2,8 +2,7 @@ package xyz.janficko.teevee.presenters;
 
 import android.content.Context;
 
-import xyz.janficko.teevee.models.Card;
-import xyz.janficko.teevee.ui.views.TextCardView;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.ui.views.TitleCardView;
 
 /**
@@ -21,9 +20,10 @@ public class TitleCardPresenter extends AbstractCardPresenter<TitleCardView> {
         return new TitleCardView(getContext());
     }
 
+
     @Override
-    public void onBindViewHolder(Card card, TitleCardView cardView) {
-        cardView.updateUi(card);
+    public void onBindViewHolder(Object submission, TitleCardView cardView) {
+        cardView.updateUi(submission);
     }
 
 }

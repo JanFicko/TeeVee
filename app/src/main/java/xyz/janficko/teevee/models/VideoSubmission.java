@@ -16,13 +16,13 @@ package xyz.janficko.teevee.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class VideoCard extends Card {
+public class VideoSubmission extends Submission {
 
     @SerializedName("sources") private String mVideoSource = "";
     @SerializedName("background") private String mBackgroundUrl = "";
     @SerializedName("studio") private String mStudio = "";
 
-    public VideoCard() {
+    public VideoSubmission() {
         super();
         setType(Type.VIDEO_GRID);
     }

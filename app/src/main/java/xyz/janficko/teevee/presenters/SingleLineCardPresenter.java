@@ -19,7 +19,7 @@ import android.content.res.TypedArray;
 import android.support.v17.leanback.widget.ImageCardView;
 
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 
 
 /**
@@ -33,11 +33,12 @@ public class SingleLineCardPresenter extends ImageCardViewPresenter {
         super(context, R.style.SingleLineCardTheme);
     }
 
-    @Override public void onBindViewHolder(Card card, ImageCardView cardView) {
-        super.onBindViewHolder(card, cardView);
+    @Override public void onBindViewHolder(Object object, ImageCardView cardView) {
+        Submission submission = (Submission) object;
+        super.onBindViewHolder(submission, cardView);
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(R.styleable.lbImageCardView);
         android.util.Log.d("SHAAN", "lbImageCardViewType ="+typedArray.getInt(R.styleable.lbImageCardView_lbImageCardViewType, -1));
-        cardView.setInfoAreaBackgroundColor(card.getFooterColor());
+        cardView.setInfoAreaBackgroundColor(submission.getFooterColor());
     }
 
 }

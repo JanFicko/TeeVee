@@ -26,8 +26,8 @@ public class DetailedCard {
     @SerializedName("text") private String mText = "";
     @SerializedName("localImageResource") private String mLocalImageResource = null;
     @SerializedName("price") private String mPrice = null;
-    @SerializedName("characters") private Card[] mCharacters = null;
-    @SerializedName("recommended") private Card[] mRecommended = null;
+    @SerializedName("characters") private Submission[] mCharacters = null;
+    @SerializedName("recommended") private Submission[] mRecommended = null;
     @SerializedName("year") private int mYear = 0;
     @SerializedName("trailerUrl") private String mTrailerUrl = null;
     @SerializedName("videoUrl") private String mVideoUrl = null;
@@ -65,11 +65,11 @@ public class DetailedCard {
         return mVideoUrl;
     }
 
-    public Card[] getCharacters() {
+    public Submission[] getCharacters() {
         return mCharacters;
     }
 
-    public Card[] getRecommended() {
+    public Submission[] getRecommended() {
         return mRecommended;
     }
 

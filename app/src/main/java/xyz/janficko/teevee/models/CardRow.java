@@ -37,7 +37,7 @@ public class CardRow {
     // Used to determine whether the row shall use shadows when displaying its cards or not.
     @SerializedName("shadow") private boolean mShadow = true;
     @SerializedName("title") private String mTitle = NO_TITLE;
-    @SerializedName("cards") private List<Card> mCards;
+    @SerializedName("cards") private List<Submission> mSubmissions;
 
     public int getType() {
         return mType;
@@ -51,8 +51,8 @@ public class CardRow {
         return mShadow;
     }
 
-    public List<Card> getCards() {
-        return mCards;
+    public List<Submission> getCards() {
+        return mSubmissions;
     }
 
 
@@ -68,7 +68,7 @@ public class CardRow {
         this.mTitle = title;
     }
 
-    public void setCards(List<Card> cards) {
-        this.mCards = cards;
+    public void setCards(List<Submission> submissions) {
+        this.mSubmissions = submissions;
     }
 }

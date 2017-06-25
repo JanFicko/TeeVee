@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.util.Utils;
 
 /**
@@ -23,15 +23,16 @@ public class TitleCardView  extends BaseCardView {
         setFocusable(true);
     }
 
-    public void updateUi(Card card) {
+    public void updateUi(Object object) {
+        Submission submission = (Submission) object;
         mTvTitle = (TextView) findViewById(R.id.tv_title);
         TextView postInfo = (TextView) findViewById(R.id.tv_post_info);
 
-        mTvTitle.setText(card.getTitle());
-        int numberOfLines = Utils.countLine(card.getTitle().length());
+        mTvTitle.setText(submission.getTitle());
+        int numberOfLines = Utils.countLine(submission.getTitle().length());
         mTvTitle.setLines(numberOfLines);
 
-        postInfo.setText(card.getPostInfo());
+        postInfo.setText(submission.getPostInfo());
     }
 
 }

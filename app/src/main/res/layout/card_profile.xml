@@ -33,11 +33,18 @@
 
     </android.support.v17.leanback.widget.NonOverlappingRelativeLayout>
 
-    <ImageView
-        android:id="@+id/iv_thumbnail"
+    <TextView
+        android:id="@+id/tv_extra_text"
         android:layout_width="300dp"
-        android:layout_height="167dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="14dp"
         android:background="@color/post_card_extra_background"
+        android:fontFamily="sans-serif-condensed"
+        android:lines="7"
+        android:maxLines="7"
         lb:layout_viewType="main"
         style="@style/Widget.Leanback.ImageCardView.ContentStyle"/>
 
@@ -50,7 +57,7 @@
         android:paddingBottom="7dp"
         android:gravity="start"
         android:orientation="horizontal"
-        android:background="@color/default_card_footer_background_color">
+        android:background="@color/post_card_footer_background">
 
         <TextView
             android:id="@+id/tv_post_info"

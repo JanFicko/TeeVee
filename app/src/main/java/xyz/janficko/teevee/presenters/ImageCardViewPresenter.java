@@ -21,7 +21,7 @@ import android.view.ContextThemeWrapper;
 import com.bumptech.glide.Glide;
 
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 
 /**
  * A very basic {@link ImageCardView} {@link android.support.v17.leanback.widget.Presenter}.You can
@@ -51,13 +51,14 @@ public class ImageCardViewPresenter extends AbstractCardPresenter<ImageCardView>
     }
 
     @Override
-    public void onBindViewHolder(Card card, final ImageCardView cardView) {
-        cardView.setTag(card);
-        cardView.setTitleText(card.getTitle());
-        cardView.setContentText(card.getDescription());
-        if (card.getLocalImageResourceName() != null) {
+    public void onBindViewHolder(Object object, final ImageCardView cardView) {
+        Submission submission = (Submission) object;
+        cardView.setTag(submission);
+        cardView.setTitleText(submission.getTitle());
+        cardView.setContentText(submission.getDescription());
+        if (submission.getLocalImageResourceName() != null) {
             int resourceId = getContext().getResources()
-                    .getIdentifier(card.getLocalImageResourceName(),
+                    .getIdentifier(submission.getLocalImageResourceName(),
                             "drawable", getContext().getPackageName());
             Glide.with(getContext())
                     .load(resourceId)

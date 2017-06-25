@@ -13,8 +13,9 @@ import net.dean.jraw.auth.AuthenticationState;
 
 import xyz.janficko.teevee.R;
 import xyz.janficko.teevee.commons.Constants;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.models.CardListRow;
+import xyz.janficko.teevee.models.Type;
 import xyz.janficko.teevee.ui.home.MainFragment;
 
 /**
@@ -55,22 +56,22 @@ public class SettingsFragment extends RowsFragment {
         ArrayObjectAdapter adapter = new ArrayObjectAdapter(iconCardPresenter);
         HeaderItem headerItem = new HeaderItem(getString(R.string.settings));
         for(int i=0; i< Constants.SETTINGS_CATEGORY.length; i++) {
-            Card card = new Card();
+            Submission submission = new Submission();
             if(mAuthenticateState == AuthenticationState.READY
                     && (i == 1
                     || i == 2
                     || i == 3)){
-                card.setTitle(Constants.SETTINGS_CATEGORY[i]);
-                card.setType(Card.Type.ICON);
-                card.setLocalImageResource(Constants.SETTINGS_ICON[i]);
-                adapter.add(card);
+                submission.setTitle(Constants.SETTINGS_CATEGORY[i]);
+                submission.setType(Type.ICON);
+                submission.setLocalImageResource(Constants.SETTINGS_ICON[i]);
+                adapter.add(submission);
             } else if((mAuthenticateState == AuthenticationState.NONE || mAuthenticateState == AuthenticationState.NEED_REFRESH)
                     && (i == 0
                     || i == 3)){
-                card.setTitle(Constants.SETTINGS_CATEGORY[i]);
-                card.setType(Card.Type.ICON);
-                card.setLocalImageResource(Constants.SETTINGS_ICON[i]);
-                adapter.add(card);
+                submission.setTitle(Constants.SETTINGS_CATEGORY[i]);
+                submission.setType(Type.ICON);
+                submission.setLocalImageResource(Constants.SETTINGS_ICON[i]);
+                adapter.add(submission);
             }
         }
 

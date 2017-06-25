@@ -18,7 +18,8 @@ import android.support.v17.leanback.widget.BaseCardView;
 import android.support.v17.leanback.widget.Presenter;
 import android.view.ViewGroup;
 
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Profile;
+import xyz.janficko.teevee.models.Submission;
 
 /**
  * This abstract, generic class will create and manage the
@@ -49,8 +50,11 @@ public abstract class AbstractCardPresenter<T extends BaseCardView> extends Pres
     }
 
     @Override public final void onBindViewHolder(ViewHolder viewHolder, Object item) {
-        Card card = (Card) item;
-        onBindViewHolder(card, (T) viewHolder.view);
+        if(item instanceof Submission){
+            onBindViewHolder((Submission) item, (T) viewHolder.view);
+        } else if(item instanceof Profile){
+            onBindViewHolder((Profile) item, (T) viewHolder.view);
+        }
     }
 
     @Override public final void onUnbindViewHolder(ViewHolder viewHolder) {
@@ -69,12 +73,12 @@ public abstract class AbstractCardPresenter<T extends BaseCardView> extends Pres
     protected abstract T onCreateView();
 
     /**
-     * Implement this method to update your card's view with the data bound to it.
+     * Implement this method to update your submission's view with the data bound to it.
      *
-     * @param card The model containing the data for the card.
-     * @param cardView The view the card is bound to.
+     * @param model The model containing the data for the submission.
+     * @param cardView The view the submission is bound to.
      * @see Presenter#onBindViewHolder(Presenter.ViewHolder, Object)
      */
-    public abstract void onBindViewHolder(Card card, T cardView);
+    public abstract void onBindViewHolder(Object model, T cardView);
 
 }

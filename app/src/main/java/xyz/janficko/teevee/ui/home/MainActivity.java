@@ -45,6 +45,7 @@ import xyz.janficko.teevee.commons.Constants;
 import xyz.janficko.teevee.ui.error.BrowseErrorActivity;
 import xyz.janficko.teevee.ui.onboard.OnboardingActivity;
 import xyz.janficko.teevee.ui.settings.AboutActivity;
+import xyz.janficko.teevee.ui.settings.PreferenceActivity;
 import xyz.janficko.teevee.util.NetworkStatusUtil;
 import xyz.janficko.teevee.util.SharedPreferenceUtil;
 
@@ -159,6 +160,11 @@ public class MainActivity extends Activity {
 				finishAffinity();
 			}
 		}.execute();
+	}
+
+	public void openPreferences(){
+		Intent intent = new Intent(this.getBaseContext(), PreferenceActivity.class);
+		startActivity(intent);
 	}
 
 	public void openAbout(){

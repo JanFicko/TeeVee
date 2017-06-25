@@ -19,8 +19,8 @@ import android.support.v17.leanback.widget.ImageCardView;
 
 import com.bumptech.glide.Glide;
 
-import xyz.janficko.teevee.models.Card;
-import xyz.janficko.teevee.models.VideoCard;
+import xyz.janficko.teevee.models.Submission;
+import xyz.janficko.teevee.models.VideoSubmission;
 
 /**
  * Presenter for rendering video cards on the Vertical Grid fragment.
@@ -36,9 +36,10 @@ public class VideoCardViewPresenter extends ImageCardViewPresenter {
     }
 
     @Override
-    public void onBindViewHolder(Card card, final ImageCardView cardView) {
-        super.onBindViewHolder(card, cardView);
-        VideoCard videoCard = (VideoCard) card;
+    public void onBindViewHolder(Object object, final ImageCardView cardView) {
+        Submission submission = (Submission) object;
+        super.onBindViewHolder(submission, cardView);
+        VideoSubmission videoCard = (VideoSubmission) submission;
         Glide.with(getContext())
                 .load(videoCard.getImageUrl())
                 .asBitmap()

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Reddit preferences">
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:disableDependentsState="true"
+        android:key="nsfw_preference"
+        android:summaryOn="I am over 18 and want to see NSFW content"
+        android:summaryOff="Hide all NSFW content"
+        android:title="NSFW content" />
+    <Preference
+        android:key="default_subreddit_preference"
+        android:summary="r/all"
+        android:title="Default subreddit" />
+
+</PreferenceScreen>

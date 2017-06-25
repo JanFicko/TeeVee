@@ -23,9 +23,9 @@ import com.google.gson.annotations.SerializedName;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class Card {
+public class Submission {
 
-    @SerializedName("type") private Card.Type mType;
+    @SerializedName("type") private Type mType;
     @SerializedName("id") private String mId;
     @SerializedName("postInfo") private String mPostInfo = "";
     @SerializedName("title") private String mTitle = "";
@@ -43,7 +43,7 @@ public class Card {
     @SerializedName("height") private int mHeight;
 
 
-    public Card.Type getType() {
+    public Type getType() {
         return mType;
     }
 
@@ -186,29 +186,6 @@ public class Card {
 
     public String getFooterLocalImageResourceName() {
         return mFooterResource;
-    }
-
-    public enum Type {
-        TEXT,
-        THUMBNAIL,
-        TITLE,
-
-
-        MOVIE_COMPLETE,
-        MOVIE,
-        MOVIE_BASE,
-        ICON,
-        SQUARE_BIG,
-        SINGLE_LINE,
-        GAME,
-        SQUARE_SMALL,
-        DEFAULT,
-        SIDE_INFO,
-        SIDE_INFO_TEST_1,
-        CHARACTER,
-        GRID_SQUARE,
-        VIDEO_GRID
-
     }
 
 }

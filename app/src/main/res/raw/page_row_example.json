@@ -1,7 +1,7 @@
 [
   {
     "title": "One Line Title",
-    "cards": [
+    "submissions": [
       {
         "type": "MOVIE",
         "title": "Deep Into The Deep Sleep",
@@ -60,7 +60,7 @@
   },
   {
     "title": "Two Line Title",
-    "cards": [
+    "submissions": [
       {
         "type": "MOVIE_BASE",
         "title": "Deep Into The Deep Sleep",
@@ -119,7 +119,7 @@
   },
   {
     "title": "Two Line Title + Icon",
-    "cards": [
+    "submissions": [
       {
         "type": "MOVIE_COMPLETE",
         "description": "$3.99",
@@ -187,7 +187,7 @@
   },
   {
     "title": "Title + Description",
-    "cards": [
+    "submissions": [
       {
         "type": "SQUARE_BIG",
         "title": "Blue in Green",
@@ -241,7 +241,7 @@
   },
   {
     "title": "Title + Description + Icon",
-    "cards": [
+    "submissions": [
       {
         "type": "GAME",
         "title": "Crazy One",
@@ -281,7 +281,7 @@
   },
   {
     "title": "Title + Description (Wide)",
-    "cards": [
+    "submissions": [
       {
         "type": "DEFAULT",
         "title": "Marseille sea food tour",
@@ -334,7 +334,7 @@
   },
   {
     "title": "BaseCardView Info On The Right",
-    "cards": [
+    "submissions": [
       {
         "type": "SIDE_INFO",
         "title": "The Life Aquatic",
@@ -388,7 +388,7 @@
   },
   {
     "title": "BaseCardView using TextView",
-    "cards": [
+    "submissions": [
       {
         "type": "TEXT",
         "title": "Jonathan Max",
@@ -441,7 +441,7 @@
   },
   {
     "title": "ImageCardView Customize Style",
-    "cards": [
+    "submissions": [
       {
         "type": "SINGLE_LINE",
         "title": "Action & Adventure",
@@ -489,7 +489,7 @@
   {
     "title": "ImageCardView with onFocusChange listener",
     "shadow": false,
-    "cards": [
+    "submissions": [
       {
         "type": "ICON",
         "title": "Settings",

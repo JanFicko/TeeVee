@@ -11,13 +11,10 @@ import android.support.v17.leanback.widget.Presenter;
 import android.support.v17.leanback.widget.PresenterSelector;
 import android.support.v17.leanback.widget.Row;
 import android.support.v17.leanback.widget.RowPresenter;
-import android.util.Log;
-import android.widget.Toast;
 
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.auth.AuthenticationManager;
 import net.dean.jraw.auth.AuthenticationState;
-import net.dean.jraw.models.Submission;
 import net.dean.jraw.paginators.SubredditPaginator;
 
 import java.util.ArrayList;
@@ -25,9 +22,10 @@ import java.util.List;
 
 import xyz.janficko.teevee.TeeVee;
 import xyz.janficko.teevee.commons.Keys;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.models.CardListRow;
 import xyz.janficko.teevee.models.CardRow;
+import xyz.janficko.teevee.models.Type;
 import xyz.janficko.teevee.presenters.CardPresenterSelector;
 import xyz.janficko.teevee.presenters.ShadowRowPresenterSelector;
 import xyz.janficko.teevee.ui.detail.DetailActivity;
@@ -70,8 +68,8 @@ public class SubredditFragment extends RowsFragment implements OnItemViewClicked
     private Row createCardRow(CardRow cardRow) {
         PresenterSelector presenterSelector = new CardPresenterSelector(getActivity());
         ArrayObjectAdapter adapter = new ArrayObjectAdapter(presenterSelector);
-        for (Card card : cardRow.getCards()) {
-            adapter.add(card);
+        for (Submission submission : cardRow.getCards()) {
+            adapter.add(submission);
         }
 
         HeaderItem headerItem = new HeaderItem(cardRow.getTitle());
@@ -83,6 +81,8 @@ public class SubredditFragment extends RowsFragment implements OnItemViewClicked
 
         Intent intent = new Intent(getActivity().getBaseContext(),
                 DetailActivity.class);
+        Submission submission = (Submission) item;
+        intent.putExtra(Keys.INTENT_SUBMISSION_ID, submission.getId());
         startActivity(intent);
     }
 
@@ -102,12 +102,12 @@ public class SubredditFragment extends RowsFragment implements OnItemViewClicked
 
                 CardRow cardRow = new CardRow();
                 cardRow.setTitle(params[0]);
-                List<Card> cardList = new ArrayList<>();
-                for (Submission link : subredditPaginator.next()) {
-                    Card card = new Card();
+                List<Submission> submissionList = new ArrayList<>();
+                for (net.dean.jraw.models.Submission link : subredditPaginator.next()) {
+                    Submission submission = new Submission();
 
-                    card.setId(link.getId());
-                    card.setTitle(link.getTitle());
+                    submission.setId(link.getId());
+                    submission.setTitle(link.getTitle());
 
                     String subreddit = (params[0].equalsIgnoreCase("FRONTPAGE") || params[0].equalsIgnoreCase("ALL")) ? "r/" + link.getSubredditName() + " | " : "";
                     String author = "u/" + link.getAuthor() + " | ";
@@ -116,22 +116,22 @@ public class SubredditFragment extends RowsFragment implements OnItemViewClicked
                             subreddit +
                             author +
                             score;
-                    card.setPostInfo(postInfo);
+                    submission.setPostInfo(postInfo);
 
                     if(link.isSelfPost() && link.getSelftext().length() != 0){
-                        card.setType(Card.Type.TEXT);
-                        card.setExtraText(link.getSelftext());
+                        submission.setType(Type.TEXT);
+                        submission.setExtraText(link.getSelftext());
                     } else if(link.getThumbnail() != null){
-                        card.setType(Card.Type.THUMBNAIL);
-                        card.setThumbnail(link.getThumbnail());
+                        submission.setType(Type.THUMBNAIL);
+                        submission.setThumbnail(link.getThumbnail());
                     } else {
-                        card.setType(Card.Type.TITLE);
+                        submission.setType(Type.TITLE);
                     }
 
-                    cardList.add(card);
+                    submissionList.add(submission);
                 }
 
-                cardRow.setCards(cardList);
+                cardRow.setCards(submissionList);
                 cardRowList.add(cardRow);
 
                 return cardRowList.toArray(new CardRow[cardRowList.size()]);

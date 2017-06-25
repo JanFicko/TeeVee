@@ -22,7 +22,9 @@ import android.support.v17.leanback.widget.PresenterSelector;
 import java.util.HashMap;
 
 import xyz.janficko.teevee.R;
-import xyz.janficko.teevee.models.Card;
+import xyz.janficko.teevee.models.Profile;
+import xyz.janficko.teevee.models.Submission;
+import xyz.janficko.teevee.models.Type;
 
 
 /**
@@ -31,7 +33,7 @@ import xyz.janficko.teevee.models.Card;
 public class CardPresenterSelector extends PresenterSelector {
 
     private final Context mContext;
-    private final HashMap<Card.Type, Presenter> presenters = new HashMap<Card.Type, Presenter>();
+    private final HashMap<Type, Presenter> presenters = new HashMap<Type, Presenter>();
 
     public CardPresenterSelector(Context context) {
         mContext = context;
@@ -39,66 +41,76 @@ public class CardPresenterSelector extends PresenterSelector {
 
     @Override
     public Presenter getPresenter(Object item) {
-        if (!(item instanceof Card)) throw new RuntimeException(
-                String.format("The PresenterSelector only supports data items of type '%s'",
-                        Card.class.getName()));
-        Card card = (Card) item;
-        Presenter presenter = presenters.get(card.getType());
-        if (presenter == null) {
-            switch (card.getType()) {
-                case TEXT:
-                    presenter = new TextCardPresenter(mContext);
-                    break;
-                case THUMBNAIL:
-                    presenter = new ThumbnailCardPresenter(mContext);
-                    break;
-                case TITLE:
-                    presenter = new TitleCardPresenter(mContext);
-                    break;
+        Presenter presenter = null;
+        if (item instanceof Submission) {
+            Submission submission = (Submission) item;
+            presenter = presenters.get(submission.getType());
+            if (presenter == null) {
+                switch (submission.getType()) {
+                    case TEXT:
+                        presenter = new TextCardPresenter(mContext);
+                        break;
+                    case THUMBNAIL:
+                        presenter = new ThumbnailCardPresenter(mContext);
+                        break;
+                    case TITLE:
+                        presenter = new TitleCardPresenter(mContext);
+                        break;
 
-
-                case SINGLE_LINE:
-                    presenter = new SingleLineCardPresenter(mContext);
-                    break;
-                case VIDEO_GRID:
-                    presenter = new VideoCardViewPresenter(mContext, R.style.VideoGridCardTheme);
-                    break;
-                case MOVIE:
-                case MOVIE_BASE:
-                case MOVIE_COMPLETE:
-                case SQUARE_BIG:
-                case GRID_SQUARE:
-                case GAME: {
-                    int themeResId = R.style.MovieCardSimpleTheme;
-                    if (card.getType() == Card.Type.MOVIE_BASE) {
-                        themeResId = R.style.MovieCardBasicTheme;
-                    } else if (card.getType() == Card.Type.MOVIE_COMPLETE) {
-                        themeResId = R.style.MovieCardCompleteTheme;
-                    } else if (card.getType() == Card.Type.SQUARE_BIG) {
-                        themeResId = R.style.SquareBigCardTheme;
-                    } else if (card.getType() == Card.Type.GRID_SQUARE) {
-                        themeResId = R.style.GridCardTheme;
-                    } else if (card.getType() == Card.Type.GAME) {
-                        themeResId = R.style.GameCardTheme;
+                    case SINGLE_LINE:
+                        presenter = new SingleLineCardPresenter(mContext);
+                        break;
+                    case VIDEO_GRID:
+                        presenter = new VideoCardViewPresenter(mContext, R.style.VideoGridCardTheme);
+                        break;
+                    case MOVIE:
+                    case MOVIE_BASE:
+                    case MOVIE_COMPLETE:
+                    case SQUARE_BIG:
+                    case GRID_SQUARE:
+                    case GAME: {
+                        int themeResId = R.style.MovieCardSimpleTheme;
+                        if (submission.getType() == Type.MOVIE_BASE) {
+                            themeResId = R.style.MovieCardBasicTheme;
+                        } else if (submission.getType() == Type.MOVIE_COMPLETE) {
+                            themeResId = R.style.MovieCardCompleteTheme;
+                        } else if (submission.getType() == Type.SQUARE_BIG) {
+                            themeResId = R.style.SquareBigCardTheme;
+                        } else if (submission.getType() == Type.GRID_SQUARE) {
+                            themeResId = R.style.GridCardTheme;
+                        } else if (submission.getType() == Type.GAME) {
+                            themeResId = R.style.GameCardTheme;
+                        }
+                        presenter = new ImageCardViewPresenter(mContext, themeResId);
+                        break;
                     }
-                    presenter = new ImageCardViewPresenter(mContext, themeResId);
-                    break;
+                    case SIDE_INFO:
+                        presenter = new SideInfoCardPresenter(mContext);
+                        break;
+                    case ICON:
+                        presenter = new IconCardPresenter(mContext);
+                        break;
+                    case CHARACTER:
+                        presenter = new CharacterCardPresenter(mContext);
+                        break;
+                    default:
+                        presenter = new ImageCardViewPresenter(mContext);
+                        break;
                 }
-                case SIDE_INFO:
-                    presenter = new SideInfoCardPresenter(mContext);
-                    break;
-                case ICON:
-                    presenter = new IconCardPresenter(mContext);
-                    break;
-                case CHARACTER:
-                    presenter = new CharacterCardPresenter(mContext);
-                    break;
-                default:
-                    presenter = new ImageCardViewPresenter(mContext);
-                    break;
             }
+            presenters.put(submission.getType(), presenter);
+        } else if(item instanceof Profile){
+            Profile profile = (Profile) item;
+            presenter = presenters.get(profile.getType());
+            if (presenter == null) {
+                switch (profile.getType()) {
+                    case PROFILE:
+                        presenter = new ProfileCardPresenter(mContext);
+                        break;
+                }
+            }
+            presenters.put(profile.getType(), presenter);
         }
-        presenters.put(card.getType(), presenter);
         return presenter;
     }
 

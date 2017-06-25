@@ -20,7 +20,7 @@
               android:orientation="vertical">
 
     <TextView
-        android:id="@+id/primary_text"
+        android:id="@+id/tv_title"
         style="@style/Widget.Leanback.DetailsDescriptionTitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,57 +37,42 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/secondary_text_first"
+            android:id="@+id/tv_user"
             style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="Secondary Text Area"/>
+            android:text="u/am1s"/>
 
         <TextView
-            android:id="@+id/secondary_text_second"
+            android:id="@+id/tv_time"
             style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
             android:fontFamily="sans-serif-condensed"
-            android:text="With Icons"/>
-
-        <ImageView
+            android:text="7h"/>
+        <TextView
+            android:id="@+id/tv_comments"
+            style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
-            android:src="@drawable/ic_cc"/>
-
-        <ImageView
+            android:fontFamily="sans-serif-condensed"
+            android:text="51.k"/>
+        <TextView
+            android:id="@+id/tv_score"
+            style="@style/Widget.Leanback.DetailsDescriptionSubtitleStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_on_yellow"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_on_yellow"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_on_yellow"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_off"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_star_off"/>
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="1383"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/extra_text"
+        android:id="@+id/tv_extra_text"
         style="@style/Widget.Leanback.DetailsDescriptionBodyStyle"
         android:layout_width="match_parent"
         android:fontFamily="sans-serif-regular"

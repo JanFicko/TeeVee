@@ -67,7 +67,7 @@ public class Constants {
     public static final String SETTINGS_ICON[] = {
             "ic_login",
             "ic_logout",
-            "ic_info",
+            "ic_reddit",
             "ic_info"
     };
 

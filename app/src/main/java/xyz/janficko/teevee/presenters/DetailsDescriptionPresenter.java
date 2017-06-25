@@ -28,7 +28,7 @@ import xyz.janficko.teevee.util.ResourceCache;
 
 /**
  * This presenter is used to render a {@link DetailedCard} in the {@link
- * DetailViewExampleFragment}.
+ * DetailFragment}.
  */
 public class DetailsDescriptionPresenter extends Presenter {
 
@@ -44,17 +44,20 @@ public class DetailsDescriptionPresenter extends Presenter {
         return new ViewHolder(view);
     }
 
-    @Override public void onBindViewHolder(ViewHolder viewHolder, Object item) {
-        TextView primaryText = mResourceCache.getViewById(viewHolder.view, R.id.primary_text);
-        TextView sndText1 = mResourceCache.getViewById(viewHolder.view, R.id.secondary_text_first);
-        TextView sndText2 = mResourceCache.getViewById(viewHolder.view, R.id.secondary_text_second);
-        TextView extraText = mResourceCache.getViewById(viewHolder.view, R.id.extra_text);
+    @Override
+    public void onBindViewHolder(ViewHolder viewHolder, Object item) {
+        TextView tvTitle = mResourceCache.getViewById(viewHolder.view, R.id.tv_title);
+        TextView tvUser = mResourceCache.getViewById(viewHolder.view, R.id.tv_user);
+        TextView tvTime = mResourceCache.getViewById(viewHolder.view, R.id.tv_time);
+        TextView tvComments = mResourceCache.getViewById(viewHolder.view, R.id.tv_comments);
+        TextView tvScore = mResourceCache.getViewById(viewHolder.view, R.id.tv_score);
 
         DetailedCard card = (DetailedCard) item;
-        primaryText.setText(card.getTitle());
-        sndText1.setText(card.getDescription());
-        sndText2.setText(card.getYear() + "");
-        extraText.setText(card.getText());
+        tvTitle.setText(card.getTitle());
+        tvUser.setText(card.getTitle());
+        tvTime.setText(card.getTitle());
+        tvComments.setText(card.getTitle());
+        tvScore.setText(card.getTitle());
     }
 
     @Override public void onUnbindViewHolder(ViewHolder viewHolder) {
