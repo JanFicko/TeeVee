@@ -104,8 +104,13 @@ public class CardPresenterSelector extends PresenterSelector {
             presenter = presenters.get(profile.getType());
             if (presenter == null) {
                 switch (profile.getType()) {
-                    case PROFILE:
+                    case COMMENT_KARMA:
+                    case LINK_KARMA:
+                    case ACCOUNT_CREATED:
                         presenter = new ProfileCardPresenter(mContext);
+                        break;
+                    case COMMENT:
+                        presenter = new CommentsCardPresenter(mContext);
                         break;
                 }
             }

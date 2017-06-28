@@ -38,6 +38,7 @@ public class CardRow {
     @SerializedName("shadow") private boolean mShadow = true;
     @SerializedName("title") private String mTitle = NO_TITLE;
     @SerializedName("cards") private List<Submission> mSubmissions;
+    @SerializedName("cards") private List<Profile> mProfiles;
 
     public int getType() {
         return mType;
@@ -51,9 +52,14 @@ public class CardRow {
         return mShadow;
     }
 
-    public List<Submission> getCards() {
+    public List<Submission> getSubmissionCards() {
         return mSubmissions;
     }
+
+    public List<Profile> getProfileCards() {
+        return mProfiles;
+    }
+
 
 
     public void setType(int type) {
@@ -68,7 +74,11 @@ public class CardRow {
         this.mTitle = title;
     }
 
-    public void setCards(List<Submission> submissions) {
+    public void setSubmissionCards(List<Submission> submissions) {
         this.mSubmissions = submissions;
     }
+    public void setProfileCards(List<Profile> profiles) {
+        this.mProfiles = profiles;
+    }
+
 }

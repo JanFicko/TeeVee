@@ -9,8 +9,10 @@ public enum Type {
     THUMBNAIL,
     TITLE,
     ICON,
-    PROFILE,
-
+    COMMENT_KARMA,
+    LINK_KARMA,
+    ACCOUNT_CREATED,
+    COMMENT,
 
     MOVIE_COMPLETE,
     MOVIE,

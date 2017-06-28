@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 
 /**
  * A collection of utility methods, all static.
@@ -139,5 +140,15 @@ public class Utils {
 		}
 	}
 
+	public static String getDateFromMilliseconds(long milliseconds){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(milliseconds);
+
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+		return day + "/" + (month + 1) + "/" + year;
+	}
 
 }

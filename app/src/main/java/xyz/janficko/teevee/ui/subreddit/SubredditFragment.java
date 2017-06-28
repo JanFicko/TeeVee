@@ -68,7 +68,7 @@ public class SubredditFragment extends RowsFragment implements OnItemViewClicked
     private Row createCardRow(CardRow cardRow) {
         PresenterSelector presenterSelector = new CardPresenterSelector(getActivity());
         ArrayObjectAdapter adapter = new ArrayObjectAdapter(presenterSelector);
-        for (Submission submission : cardRow.getCards()) {
+        for (Submission submission : cardRow.getSubmissionCards()) {
             adapter.add(submission);
         }
 
@@ -131,7 +131,7 @@ public class SubredditFragment extends RowsFragment implements OnItemViewClicked
                     submissionList.add(submission);
                 }
 
-                cardRow.setCards(submissionList);
+                cardRow.setSubmissionCards(submissionList);
                 cardRowList.add(cardRow);
 
                 return cardRowList.toArray(new CardRow[cardRowList.size()]);
