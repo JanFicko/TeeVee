@@ -26,10 +26,7 @@ import xyz.janficko.teevee.R;
 import xyz.janficko.teevee.models.DetailedCard;
 import xyz.janficko.teevee.util.ResourceCache;
 
-/**
- * This presenter is used to render a {@link DetailedCard} in the {@link
- * DetailFragment}.
- */
+
 public class DetailsDescriptionPresenter extends Presenter {
 
     private ResourceCache mResourceCache = new ResourceCache();
@@ -51,13 +48,15 @@ public class DetailsDescriptionPresenter extends Presenter {
         TextView tvTime = mResourceCache.getViewById(viewHolder.view, R.id.tv_time);
         TextView tvComments = mResourceCache.getViewById(viewHolder.view, R.id.tv_comments);
         TextView tvScore = mResourceCache.getViewById(viewHolder.view, R.id.tv_score);
+        TextView tvExtraText = mResourceCache.getViewById(viewHolder.view, R.id.tv_extra_text);
 
         DetailedCard card = (DetailedCard) item;
         tvTitle.setText(card.getTitle());
-        tvUser.setText(card.getTitle());
-        tvTime.setText(card.getTitle());
-        tvComments.setText(card.getTitle());
-        tvScore.setText(card.getTitle());
+        tvUser.setText(card.getUser());
+        tvTime.setText(card.getTime());
+        tvComments.setText(card.getCommentCount());
+        tvScore.setText(card.getScore());
+        tvExtraText.setText(card.getText());
     }
 
     @Override public void onUnbindViewHolder(ViewHolder viewHolder) {

@@ -9,6 +9,9 @@
     <string name="link_karma">Link karma</string>
     <string name="created">Created</string>
     <string name="comments">Comments</string>
+    <string name="open_link">Open link</string>
+    <string name="upvote">Upvote</string>
+    <string name="downvote">Downvote</string>
 
     <!-- Strings related to onboarding -->
     <string name="onboarding_title_welcome">Welcome to the TeeVee app</string>

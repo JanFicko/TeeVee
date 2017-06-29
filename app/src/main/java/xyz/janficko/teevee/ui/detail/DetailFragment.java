@@ -1,5 +1,7 @@
 package xyz.janficko.teevee.ui.detail;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +40,7 @@ import xyz.janficko.teevee.TeeVee;
 import xyz.janficko.teevee.models.Submission;
 import xyz.janficko.teevee.models.CardListRow;
 import xyz.janficko.teevee.models.DetailedCard;
+import xyz.janficko.teevee.models.Type;
 import xyz.janficko.teevee.presenters.CardPresenterSelector;
 import xyz.janficko.teevee.presenters.DetailsDescriptionPresenter;
 import xyz.janficko.teevee.util.Utils;
@@ -51,20 +54,19 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
 
     private DetailActivity mDetailActivity;
 
+    private net.dean.jraw.models.Submission mSubmission;
+
     public static final String TRANSITION_NAME = "t_for_transition";
     public static final String EXTRA_CARD = "card";
 
-    private static final long ACTION_BUY = 1;
-    private static final long ACTION_WISHLIST = 2;
-    private static final long ACTION_RELATED = 3;
+    private static final long ACTION_OPEN_LINK = 1;
+    private static final long ACTION_UPVOTE = 2;
+    private static final long ACTION_DOWNVOTE = 3;
 
-    private Action mActionBuy;
-    private Action mActionWishList;
-    private Action mActionRelated;
+    private Action mActionOpenLink;
+    private Action mActionUpvote;
+    private Action mActionDownvote;
     private ArrayObjectAdapter mRowsAdapter;
-    private MediaPlayerGlue mMediaPlayerGlue;
-    private final DetailsFragmentBackgroundController mDetailsBackground =
-            new DetailsFragmentBackgroundController(this);
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -83,22 +85,18 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
     }
 
     private void setupUi() {
-        net.dean.jraw.models.Submission submission = null;
         try {
-            submission = new LoadSubmissionTask().execute(mDetailActivity.getSubmissionId()).get();
+            mSubmission = new LoadSubmissionTask().execute(mDetailActivity.getSubmissionId()).get();
         } catch (InterruptedException |ExecutionException e) {
             e.printStackTrace();
         }
 
-
-        // Load the card we want to display from a JSON resource. This JSON data could come from
-        // anywhere in a real world app, e.g. a server.
-        String json = Utils
-                .inputStreamToString(getResources().openRawResource(R.raw.detail_example));
-        DetailedCard data = new Gson().fromJson(json, DetailedCard.class);
-
-        // Setup fragment
-        setTitle(submission.getTitle());
+        DetailedCard data = new DetailedCard();
+        data.setTitle(mSubmission.getTitle());
+        data.setUser("u/" + mSubmission.getAuthor());
+        data.setScore(Utils.scoreWithSuffix(mSubmission.getScore()));
+        data.setCommentCount(Utils.scoreWithSuffix(mSubmission.getCommentCount()));
+        data.setTime(Utils.getDateFromMilliseconds(mSubmission.getCreated().getTime()));
 
         FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
                 new DetailsDescriptionPresenter(getActivity())) {
@@ -147,28 +145,28 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
         //detailsOverview.setImageDrawable(getResources().getDrawable(imageResId, null));
         ArrayObjectAdapter actionAdapter = new ArrayObjectAdapter();
 
-        mActionBuy = new Action(ACTION_BUY, getString(R.string.action_buy) + data.getPrice());
-        mActionWishList = new Action(ACTION_WISHLIST, getString(R.string.action_wishlist));
-        mActionRelated = new Action(ACTION_RELATED, getString(R.string.action_related));
+        mActionOpenLink = new Action(ACTION_OPEN_LINK, getString(R.string.open_link));
+        mActionUpvote = new Action(ACTION_UPVOTE, getString(R.string.upvote));
+        mActionDownvote = new Action(ACTION_DOWNVOTE, getString(R.string.downvote));
 
-        actionAdapter.add(mActionBuy);
-        actionAdapter.add(mActionWishList);
-        actionAdapter.add(mActionRelated);
+        actionAdapter.add(mActionOpenLink);
+        actionAdapter.add(mActionUpvote);
+        actionAdapter.add(mActionDownvote);
         detailsOverview.setActionsAdapter(actionAdapter);
         mRowsAdapter.add(detailsOverview);
 
         // Setup related row.
-        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
+        /*ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(
                 new CardPresenterSelector(getActivity()));
         for (Submission characterSubmission : data.getCharacters()) listRowAdapter.add(characterSubmission);
         HeaderItem header = new HeaderItem(0, getString(R.string.header_related));
-        mRowsAdapter.add(new CardListRow(header, listRowAdapter, null));
+        mRowsAdapter.add(new CardListRow(header, listRowAdapter, null));*/
 
         // Setup recommended row.
-        listRowAdapter = new ArrayObjectAdapter(new CardPresenterSelector(getActivity()));
+        /*listRowAdapter = new ArrayObjectAdapter(new CardPresenterSelector(getActivity()));
         for (Submission card : data.getRecommended()) listRowAdapter.add(card);
         header = new HeaderItem(1, getString(R.string.header_recommended));
-        mRowsAdapter.add(new ListRow(header, listRowAdapter));
+        mRowsAdapter.add(new ListRow(header, listRowAdapter));*/
 
         setAdapter(mRowsAdapter);
         new Handler().postDelayed(new Runnable() {
@@ -191,12 +189,8 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
         if (!(item instanceof Action)) return;
         Action action = (Action) item;
 
-        if (action.getId() == ACTION_RELATED) {
-            setSelectedPosition(1);
-        } else {
-            Toast.makeText(getActivity(), getString(R.string.action_cicked), Toast.LENGTH_LONG)
-                    .show();
-        }
+        Toast.makeText(getActivity(), getString(R.string.action_cicked), Toast.LENGTH_LONG)
+                .show();
     }
 
     @Override

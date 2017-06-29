@@ -22,6 +22,51 @@ import com.google.gson.annotations.SerializedName;
 public class DetailedCard {
 
     @SerializedName("title") private String mTitle = "";
+    @SerializedName("user") private String mUser = "";
+    @SerializedName("time") private String mTime = "";
+    @SerializedName("commentCount") private String mCommentCount = "";
+    @SerializedName("score") private String mScore = "";
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+    }
+
+    public String getUser() {
+        return mUser;
+    }
+
+    public void setUser(String user) {
+        this.mUser = user;
+    }
+
+    public String getTime() {
+        return mTime;
+    }
+
+    public void setTime(String time) {
+        this.mTime = mTime;
+    }
+
+    public String getCommentCount() {
+        return mCommentCount;
+    }
+
+    public void setCommentCount(String commentCount) {
+        this.mCommentCount = commentCount;
+    }
+
+    public String getScore() {
+        return mScore;
+    }
+
+    public void setScore(String score) {
+        this.mScore = score;
+    }
+
     @SerializedName("description") private String mDescription = "";
     @SerializedName("text") private String mText = "";
     @SerializedName("localImageResource") private String mLocalImageResource = null;
@@ -53,10 +98,6 @@ public class DetailedCard {
         return mDescription;
     }
 
-    public String getTitle() {
-        return mTitle;
-    }
-
     public String getTrailerUrl() {
         return mTrailerUrl;
     }
@@ -69,8 +110,16 @@ public class DetailedCard {
         return mCharacters;
     }
 
+    public void setCharacters(Submission[] characters) {
+        mCharacters = characters;
+    }
+
     public Submission[] getRecommended() {
         return mRecommended;
+    }
+
+    public void setRecommended(Submission[] recommended) {
+        mRecommended = recommended;
     }
 
     public int getLocalImageResourceId(Context context) {
