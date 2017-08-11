@@ -97,6 +97,7 @@ public class DetailFragment extends DetailsFragment implements OnItemViewClicked
         data.setScore(Utils.scoreWithSuffix(mSubmission.getScore()));
         data.setCommentCount(Utils.scoreWithSuffix(mSubmission.getCommentCount()));
         data.setTime(Utils.getDateFromMilliseconds(mSubmission.getCreated().getTime()));
+        data.setText(mSubmission.getSelftext());
 
         FullWidthDetailsOverviewRowPresenter rowPresenter = new FullWidthDetailsOverviewRowPresenter(
                 new DetailsDescriptionPresenter(getActivity())) {

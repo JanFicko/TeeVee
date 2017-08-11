@@ -26,6 +26,7 @@ public class DetailedCard {
     @SerializedName("time") private String mTime = "";
     @SerializedName("commentCount") private String mCommentCount = "";
     @SerializedName("score") private String mScore = "";
+    @SerializedName("text") private String mText = "";
 
     public String getTitle() {
         return mTitle;
@@ -67,8 +68,15 @@ public class DetailedCard {
         this.mScore = score;
     }
 
+    public String getText() {
+        return mText;
+    }
+
+    public void setText(String text) {
+        this.mText = text;
+    }
+
     @SerializedName("description") private String mDescription = "";
-    @SerializedName("text") private String mText = "";
     @SerializedName("localImageResource") private String mLocalImageResource = null;
     @SerializedName("price") private String mPrice = null;
     @SerializedName("characters") private Submission[] mCharacters = null;
@@ -90,9 +98,6 @@ public class DetailedCard {
         return mLocalImageResource;
     }
 
-    public String getText() {
-        return mText;
-    }
 
     public String getDescription() {
         return mDescription;
