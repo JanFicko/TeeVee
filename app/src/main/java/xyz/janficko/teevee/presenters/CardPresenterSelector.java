@@ -78,8 +78,6 @@ public class CardPresenterSelector extends PresenterSelector {
                             themeResId = R.style.SquareBigCardTheme;
                         } else if (submission.getType() == Type.GRID_SQUARE) {
                             themeResId = R.style.GridCardTheme;
-                        } else if (submission.getType() == Type.GAME) {
-                            themeResId = R.style.GameCardTheme;
                         }
                         presenter = new ImageCardViewPresenter(mContext, themeResId);
                         break;
@@ -89,9 +87,6 @@ public class CardPresenterSelector extends PresenterSelector {
                         break;
                     case ICON:
                         presenter = new IconCardPresenter(mContext);
-                        break;
-                    case CHARACTER:
-                        presenter = new CharacterCardPresenter(mContext);
                         break;
                     default:
                         presenter = new ImageCardViewPresenter(mContext);
